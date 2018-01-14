@@ -22,10 +22,10 @@ To check if IIS installed ,type in the start menu iis if no results found then y
 3.The properties for a new application will be displayed. 
 4.The "Add Application" screen contains several settings that need to be configured.After each of the settings below have been configured, click OK to create the web application. 
 
-	Alias : This is the name of the project “HotelsBooking” downloaded from GitHub.This should be one word without any spaces.This     name will be the web page that you will need to access to use the HotelsBooking Module.  eg.  www.machinename.com/virtualdirectoryalias 
-	Application pool : Select the application pool that the HotelsBooking  web interface will operate in.  Choose the Classic.Net AppPool or select / create another Classic application pool.  For further information about Application pools, refer to Web applications and pools.
-        Physical path : Click the "..." button to browse to where you installed "HotelsBooking" project.  It is vital that you select the “HotelsBooking” folder.  If you selected default settings during the setup, this location may be "C:/inetpub/wwwroot/HotelsBooking Web Interface" or similar.  Note: If you moved this folder at any time, or wish to re-locate this folder, please read this first.
-        Connect as... : Select the connection method.  The default setting is "Application user (pass-through authentication)"
+1-Alias : This is the name of the project “HotelsBooking” downloaded from GitHub.This should be one word without any spaces.This     name will be the web page that you will need to access to use the HotelsBooking Module.  eg.  www.machinename.com/virtualdirectoryalias 
+2-Application pool : Select the application pool that the HotelsBooking  web interface will operate in.  Choose the Classic.Net AppPool or select / create another Classic application pool.  For further information about Application pools, refer to Web applications and pools.
+3-Physical path : Click the "..." button to browse to where you installed "HotelsBooking" project.  It is vital that you select the “HotelsBooking” folder.  If you selected default settings during the setup, this location may be "C:/inetpub/wwwroot/HotelsBooking Web Interface" or similar.  Note: If you moved this folder at any time, or wish to re-locate this folder, please read this first.
+4-Connect as... : Select the connection method.  The default setting is "Application user (pass-through authentication)"
 
 **To Start HotelsBooking Web site:
 
