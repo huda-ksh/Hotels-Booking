@@ -1,0 +1,186 @@
+﻿@model HotelsBooking.Models.HotelViewModel
+@using HotelsBooking.Infrastructure
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+<head>
+    <!-- meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Theme Blog - Web Template Design</title>
+
+   
+
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+           
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a href="hotel\index">Home</span></a></li>
+
+                </ul>
+            </div><!-- end of /.navbar-collapse -->
+        </div><!-- end of /.container -->
+    </nav>
+    @using (Html.BeginForm("Index", "Hotel", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+       
+        <main>
+            @Html.HiddenFor(x => x.hdnCity, new { @id = "hdnCity", @name = "hdnCity" })
+            @Html.HiddenFor(x => x.hdnCountry, new { @id = "hdnCountry", @name = "hdnCountry" })
+            @Html.HiddenFor(x => x.hdnPlace_id, new { @id = "hdnPlace_id", @name = "hdnPlace_id" })
+
+            
+            <div class="container"> 
+                <div class="row">
+                    <!-- blog-contents -->
+                    @if (Model.HotelsList.Count == 0)
+                    {
+                    @Html.Label("no data found")
+                    }
+                    else
+                    {
+                    <section class="col-md-8">
+                        @foreach (var hotel in Model.HotelsList)
+        {
+                <article class="blog-item">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <a href="single_blog_page.html">
+                                <img src="@hotel.hotelInfo.hotelImageUrl" class="img-thumbnail center-block" alt="Blog Post Thumbnail">
+                            </a>
+                        </div>
+                        <div class="col-md-6">
+                            <h2 style="    font-size: 20px;">
+                                <a href="single_blog_page.html">@hotel.hotelInfo.hotelName</a>
+                            </h2>
+                            <div class="fff"></div>
+                            <p style="color:gray ">
+                                in
+                                @hotel.destination.shortName
+                                ,
+                                @hotel.destination.province
+                            </p>
+
+                        </div>
+
+                        <div class="col-md-3">
+                            <div>
+                                <p>
+                                    <b>
+                                        <strike style="font-size:18px;  color:gray;">$ @hotel.hotelPricingInfo.crossOutPriceValue </strike>
+                                        &nbsp;&nbsp;
+
+                                        <label style="font-size:18px;  color:black;">
+                                            $ @{ double d = Convert.ToInt32(hotel.hotelPricingInfo.crossOutPriceValue * @hotel.hotelPricingInfo.percentSavings) / 100;}
+                                            @d.ToString()
+                                        </label>
+                                    </b>
+                                </p>
+
+                            </div>
+                            <div style="color:cornflowerblue;font-size:12px">
+                                @if (hotel.hotelInfo.hotelReviewTotal > 0)
+                {
+                    <label>(@hotel.hotelInfo.hotelReviewTotal  reviews)</label>
+}
+                            </div>
+                        </div>
+                    </div>
+                </article> <!-- /.blog-item -->
+}
+
+
+                    </section>
+                    }
+                    <!-- end of blog-contents -->
+                    <!-- sidebar -->
+                    <aside class="col-md-4 col-sm-8 col-xs-8">
+                        <div class="sidebar">
+                            <!-- search option -->
+                            <div class="search-widget">
+                                <div class="input-group margin-bottom-sm">
+                                    @Html.TextAreaFor(x => x.SelectedCountry, new { @id = "autocomplete_textarea", @name = "autocomplete_textarea", rows = "1", cols = "12", @class = "form-control" })
+                                    @*<input class="form-control" type="text" placeholder="Search here">*@
+
+                                </div>
+                            </div>
+                            <div class="search-widget">
+                                <div class="input-group margin-bottom-sm">
+                                    @Html.TextBoxFor(x => x.DateFrom,  new { @type = "date", @id = "DateFrom", @placeholder = "Min Trip Date", @name = "DateFrom", rows = "1", cols = "12", @class = "form-control",@style="height:35px" })
+                                </div>
+                            </div>
+                            <div class="search-widget">
+                                <div class="input-group margin-bottom-sm">
+                                    @Html.TextBoxFor(x => x.DateTo, "{0:MM-dd-yyyy}", new { @type = "date", @id = "DateTo", @placeholder = "Max trip Date", @name = "DateTo", rows = "1", cols = "12", @class = "form-control", @style = "height:35px" })
+                                </div>
+                            </div>
+                            <div class="search-widget">
+                                <div class="input-group margin-bottom-sm">
+                                    @Html.TextBoxFor(x => x.LengthOfStay, new { @id = "LengthOfStay", @placeholder = "Length Of Stay", @name = "LengthOfStay", @class = "form-control", @style = "height:35px" })
+                                </div>
+                            </div>
+                            <div class="search-widget">
+                                <div class="input-group margin-bottom-sm">
+                                    @Html.TextBoxFor(x => x.MinStarRating, new { @type = "number", @step = "any", @id = "MinStarRating", @style = "width:43%;float:left;height:35px", @placeholder = "Min Star Rating", @name = "MinStarRating", @class = "form-control" })
+                                    @Html.Label("/", new { @style = "width:10%;padding:12px 24px; font-size:34px" })
+                                    @Html.TextBoxFor(x => x.MaxStarRating, new { @type = "number", @step = "any", @id = "MaxStarRating", @style = "width:44%;float:right;height:35px", @placeholder = "Max Star Rating", @name = "MaxStarRating", @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="search-widget">
+                                <div class="input-group margin-bottom-sm">
+                                    @Html.TextBoxFor(x => x.MinTotalRate, new { @type = "number", @id = "MinTotalRate", @placeholder = "Min Total Rate", @style = "width:43%;float:left;height:35px", @name = "MinTotalRate", @class = "form-control"})
+                                    @Html.Label("/", new { @style = "width:10%;padding:12px 24px; font-size:34px" })
+                                    @Html.TextBoxFor(x => x.MaxTotalRate, new { @type = "number", @id = "MaxTotalRate", @placeholder = "Max Total Rate", @style = "width:44%;float:right;height:35px", @name = "MaxTotalRate", @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="search-widget">
+                                <div class="input-group margin-bottom-sm">
+                                    @Html.TextBoxFor(x => x.MinGuestRating, new { @type = "number", @step = "any", @id = "MinGuestRating", @placeholder = "Min Guest Rating", @style = "width:43%;float:left;height:35px", @name = "MinGuestRating", @class = "form-control" })
+                                    @Html.Label("/", new { @style = "width:10%;padding:12px 24px; font-size:34px" })
+                                    @Html.TextBoxFor(x => x.MaxGuestRating, new { @type = "number", @step = "any", @id = "MaxGuestRating", @placeholder = "Max Guest Rating", @style = "width:44%;float:right;height:35px", @name = "MaxGuestRating", @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="search-widget">
+                                <div class="input-group margin-bottom-sm">
+                                    <input type="submit" value="search" style="width: 389px; background-color: black;color: orange;height: 55px;" />
+                                </div>
+                            </div>
+
+                            <!-- subscribe form -->
+
+
+
+                        </div>
+                    </aside>
+                    <!-- end of sidebar -->
+                </div>
+            </div> <!-- end of /.container -->
+        </main>
+
+                                                            }
+
+</body>
+</html>
